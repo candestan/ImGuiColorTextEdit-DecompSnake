@@ -194,6 +194,11 @@ public:
 	void SetErrorMarkers(const ErrorMarkers& aMarkers) { mErrorMarkers = aMarkers; }
 	void SetBreakpoints(const Breakpoints& aMarkers) { mBreakpoints = aMarkers; }
 
+	// 1-based line index -> ABGR background (drawn under glyphs, over default bg).
+	typedef std::unordered_map<int, ImU32> LineBgColors;
+	void SetLineBgColors(const LineBgColors& aColors) { mLineBgColors = aColors; }
+	void ClearLineBgColors() { mLineBgColors.clear(); }
+
 	void Render(const char* aTitle, const ImVec2& aSize = ImVec2(), bool aBorder = false);
 	void SetText(const std::string& aText);
 	std::string GetText() const;
@@ -380,6 +385,7 @@ private:
 	bool mCheckComments;
 	Breakpoints mBreakpoints;
 	ErrorMarkers mErrorMarkers;
+	LineBgColors mLineBgColors;
 	ImVec2 mCharAdvance;
 	Coordinates mInteractiveStart, mInteractiveEnd;
 	std::string mLineBuffer;
