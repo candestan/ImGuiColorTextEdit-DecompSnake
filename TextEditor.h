@@ -199,6 +199,11 @@ public:
 	void SetLineBgColors(const LineBgColors& aColors) { mLineBgColors = aColors; }
 	void ClearLineBgColors() { mLineBgColors.clear(); }
 
+	// When true, navigation / Enter / Tab / Escape are ignored so a completion UI can own them.
+	// Character input (InputQueueCharacters) still applies.
+	void SetCompletionBlocking(bool aValue) { mCompletionBlocking = aValue; }
+	bool IsCompletionBlocking() const { return mCompletionBlocking; }
+
 	void Render(const char* aTitle, const ImVec2& aSize = ImVec2(), bool aBorder = false);
 	void SetText(const std::string& aText);
 	std::string GetText() const;
@@ -386,6 +391,7 @@ private:
 	Breakpoints mBreakpoints;
 	ErrorMarkers mErrorMarkers;
 	LineBgColors mLineBgColors;
+	bool mCompletionBlocking = false;
 	ImVec2 mCharAdvance;
 	Coordinates mInteractiveStart, mInteractiveEnd;
 	std::string mLineBuffer;
